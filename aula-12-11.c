@@ -48,9 +48,9 @@ void exibirLista(NO* inicio) {
     NO* aux = (*inicio).prox;  
 
     printf("Lista (do inicio ao fim): ");
-
     while(aux!=NULL) {
-        printf("%d\n", (*aux).valor);
+        printf("%d ", (*aux).valor);
+        aux = (*aux).prox;
     }
 
 }
@@ -74,7 +74,7 @@ int main() {
 
         switch (opc) {
             case 1: 
-                printf("Digite o valor que deseja inserir.");
+                printf("Digite o valor que deseja inserir: ");
                 scanf("%d", &valor);
 
                 inserir(valor, inicio);
@@ -83,7 +83,7 @@ int main() {
                 printf("Em qual posição deseja inserir?");
                 scanf("%d", &pos);
 
-                printf("Digite o valor que deseja inserir.");
+                printf("Digite o valor que deseja inserir: ");
                 scanf("%d", &valor);
 
                 NO* aux = acessar(pos, inicio);
@@ -95,6 +95,8 @@ int main() {
                 NO* removido = acessar(pos-1, inicio);
                 remover(removido);
                 break;
+            case 4:
+                exibirLista(inicio);
             case 0: 
                 return 0;
             default:

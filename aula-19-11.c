@@ -45,6 +45,7 @@ void inserir(NO* raiz, int valor) {
 int remover(NO* raiz, int valor) {
     NO* aux = raiz;
     NO* ant;
+    int item;
 
     while (1) {
         if (valor < (*aux).valor) {
@@ -54,35 +55,24 @@ int remover(NO* raiz, int valor) {
             ant = aux;
             aux = (*aux).dir;
         } else {
+            item = (*aux).valor;
+
             if(aux == (*ant).dir) {
-                (*aux).dir = NULL;
-                free(aux);
-                break;
+                ant->dir = aux->esq;
+                aux->esq->dir = aux->dir;
             } else {
-                (*aux).esq = NULL;
-                free(aux);
-                break;
+                ant->esq = aux->dir;
+                aux->dir->esq = aux->esq;
             }
+            free(aux);
+
+            break;
         }
     }
+
+    return item;
 }
 
-void imprimir(NO* raiz) {
-    printf("Árvore em pré-ordem: ");
-
-    /*
-    NO* raiz = (*raiz).esq;
-
-    while (atual != NULL) {
-        printf("%d ", (*atual).valor);
-        atual = (*atual).prox;
-    }
-    printf("\n");
-    
-    */
-
-
-}
 
 int main() {
     NO* raiz = NULL;
@@ -92,7 +82,8 @@ int main() {
     inserir(raiz, 10);
     inserir(raiz, 30);
     inserir(raiz, 80);
-    inserir(raiz,5);
+    inserir(raiz, 5);
+
 
 
 }
